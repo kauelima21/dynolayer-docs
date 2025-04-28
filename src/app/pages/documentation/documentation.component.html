@@ -1,0 +1,22 @@
+<main class="grid grid-cols-[200px_0px_1fr] gap-5 text-zinc-700">
+  <aside>
+    <nav>
+      <ul class="flex flex-col gap-2">
+        <li class="border-l border-transparent hover:text-sky-500">
+          <a routerLink="getting-started" routerLinkActive="text-sky-500" class="pl-4">Comece a usar</a>
+        </li>
+        <li class="border-l border-transparent hover:text-sky-500">
+          <a routerLink="persisting-data" class="pl-4">Persistindo dados</a>
+        </li>
+        <li class="border-l border-transparent hover:text-sky-500">
+          <a routerLink="retrieving-data" class="pl-4">Realizando consultas</a>
+        </li>
+        <li class="border-l border-transparent hover:text-sky-500">
+          <a routerLink="removing-data" class="pl-4">Removendo dados</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <router-outlet />
+</main>

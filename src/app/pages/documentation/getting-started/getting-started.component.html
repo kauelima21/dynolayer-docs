@@ -1,0 +1,26 @@
+<section class="flex flex-col gap-5">
+  <h2 class="font-semibold text-2xl">Introdução</h2>
+  <p>
+    O DynoLayer é uma ferramenta que simplifica e agiliza o acesso e
+    manipulação de dados no Amazon DynamoDB, baseada no padrão Active Record.
+  </p>
+
+  <h2 class="font-semibold text-2xl">Instalação</h2>
+  <p>
+    Para adicionar o DynoLayer ao seu projeto python, basta utilizar o comando abaixo:
+  </p>
+  <app-code-block [code]="'pip install dynolayer'" language="bash" />
+  <p>
+    Para realizar o download do boto3 como uma dependência
+    (no caso de executar fora de uma AWS Lambda), usa-se o comando a seguir:
+  </p>
+  <app-code-block [code]="'pip install dynolayer[aws]'" language="bash" />
+
+  <h2 class="font-semibold text-2xl">Criando uma model</h2>
+  <p>
+    Para criar uma model utilizando o DynoLayer, é preciso criar a classe
+    que representará o dado e fazer com que estenda a classe da lib.<br />
+    Como exemplo, segue a implementação de uma model <strong>User</strong>.
+  </p>
+  <app-code-block [code]="modelCode" />
+</section>

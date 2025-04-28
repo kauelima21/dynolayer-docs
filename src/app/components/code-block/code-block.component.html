@@ -2,7 +2,7 @@
   <span class="mb-0 grid overflow-auto flex-1 h-full">
     <code
       #codeBlock
-      [attr.class]="'language-' + language"
+      [attr.class]="'language-' + language()"
       [innerHtml]="highlightedCode"
     ></code>
   </span>

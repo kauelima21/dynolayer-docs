@@ -1,0 +1,15 @@
+<section class="flex flex-col gap-5 mb-6 text-zinc-800">
+  <h2 class="font-semibold text-2xl">Introdução</h2>
+  <p>
+    No DynoLayer, é possível remover dados de duas formas: fazendo um <b>delete</b> ou um <b>destroy</b>.
+  </p>
+  <p>Abaixo, haverão exemplos de como implementar ambos os casos.</p>
+
+  <h2 class="font-semibold text-2xl">Removendo registros</h2>
+  <p>
+    Ambos os casos resultam na remoção de um item da tabela. Ao usar o <b>destroy</b>, basta indicar
+    a chave primária e ação será executada.<br />
+    No caso do <b>delete</b>, deve-se primeiro criar uma instância da model com os dados do registro.
+  </p>
+  <app-code-block [code]="deleteCode" />
+</section>

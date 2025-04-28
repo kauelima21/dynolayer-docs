@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+
+  pre_build:
+    commands:
+      - npm ci
+
+  build:
+    commands:
+      - npm run build
+
+  post_build:
+    commands:
+      - aws s3 sync ./dist/dynolayer-docs/browser/* s3://${DEPLOY_BUCKET} --delete
+      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_ID} --paths "/*"

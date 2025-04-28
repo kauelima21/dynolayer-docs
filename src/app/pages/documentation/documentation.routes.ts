@@ -11,6 +11,7 @@ export const DOCS_ROUTES: Routes = [
         loadComponent: () => import('./getting-started/getting-started.component')
           .then(c => c.GettingStartedComponent)
       },
+      { path: '', redirectTo: 'getting-started', pathMatch: 'full' }
     ],
   },
 ];

@@ -1,4 +1,4 @@
-<section class="flex flex-col gap-5">
+<section class="flex flex-col gap-5 mb-6">
   <h2 class="font-semibold text-2xl">Introdução</h2>
   <p>
     O DynoLayer é uma ferramenta que simplifica e agiliza o acesso e
@@ -11,16 +11,30 @@
   </p>
   <app-code-block [code]="'pip install dynolayer'" language="bash" />
   <p>
-    Para realizar o download do boto3 como uma dependência
-    (no caso de executar fora de uma AWS Lambda), usa-se o comando a seguir:
+    No caso de executar o código fora de uma AWS Lambda, usa-se o comando a seguir:
   </p>
   <app-code-block [code]="'pip install dynolayer[aws]'" language="bash" />
 
-  <h2 class="font-semibold text-2xl">Criando uma model</h2>
+  <h2 id="criando-uma-model" class="font-semibold text-2xl">Criando uma model</h2>
   <p>
     Para criar uma model utilizando o DynoLayer, é preciso criar a classe
-    que representará o dado e fazer com que estenda a classe da lib.<br />
+    que representará a entidade e fazer com que estenda a classe da lib.<br />
     Como exemplo, segue a implementação de uma model <strong>User</strong>.
   </p>
   <app-code-block [code]="modelCode" />
+  <div>
+    Abaixo, o que cada parâmetro representa:
+    <ul>
+      <li><strong>entity:</strong> é o nome da tabela.</li>
+      <li><strong>required_fields:</strong> campos obrigatórios ao salvar um novo registro.</li>
+      <li>
+        <strong>fillable:</strong> campos que serão preenchidos quando utilizado
+        o método <strong>create</strong>.
+      </li>
+      <li>
+        <strong>timestamps:</strong> indica se os registros terão <b>created_at</b> e <b>updated_at</b>.
+        Por padrão, seu valor é <strong>True</strong>.
+      </li>
+    </ul>
+  </div>
 </section>

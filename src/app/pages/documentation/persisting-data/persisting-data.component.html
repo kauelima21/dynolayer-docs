@@ -1,0 +1,28 @@
+<section class="flex flex-col gap-5 mb-6 text-zinc-800">
+  <h2 class="font-semibold text-2xl">Introdução</h2>
+  <p>
+    No DynoLayer, é possível persistir dados de duas formas: fazendo um <b>create</b> ou um <b>save</b>.
+  </p>
+  <p>Abaixo, haverão exemplos de como implementar ambos os casos.</p>
+
+  <h2 class="font-semibold text-2xl">Salvando registros</h2>
+  <p>
+    A primeira forma de persistência é usando o <b>create</b>. Para isso, é necessário antes
+    que hajam propriedades declaradas no atributo <b>fillable</b>. Uma vez que estas
+    tenham sido indicadas, basta acionar o método passando um dicionário que as contenha.
+    O DynoLayer filtrará pelos campos declarados e realizará o cadastro do registro.
+  </p>
+  <app-code-block [code]="createMethodCode" />
+  <p>
+    A segunda forma é usando o <b>save</b>, que também é usada para atualizar registros.
+    Ou seja, caso o registro não exista com a chave primária indicada, o DynamoDB irá inserir um novo item na tabela.
+  </p>
+  <app-code-block [code]="saveMethodCode" />
+
+  <h2 class="font-semibold text-2xl">Atualizando registros</h2>
+  <p>
+    Conforme o exemplo anterior, o método <b>save</b> também é utilizado para atualizar registros em uma tabela.
+    Desse modo, ao utilizar o save em um item que já existe, a operação apenas atualizará os campos passados.
+  </p>
+  <app-code-block [code]="updateExample" />
+</section>

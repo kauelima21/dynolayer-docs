@@ -1,0 +1,47 @@
+<section class="flex flex-col gap-5 mb-6 text-zinc-800">
+  <h2 class="font-semibold text-2xl">Introdução</h2>
+  <p>
+    Existem algumas formas de realizar consultas com o DynoLayer, onde, dependendo do
+    caso de uso, será aplicado uma operação de <b>query</b> ou <b>scan</b> contra a tabela.
+  </p>
+  <p>Abaixo, haverão exemplos de como implementar ambos os casos.</p>
+
+  <h2 class="font-semibold text-2xl">Resgatando todos o itens da tabela</h2>
+  <p>
+    Para realizar um "full scan", usa-se o método <b>all</b>, que realizará uma operação de scan
+    paginando todos os registros e retornando uma lista de dicionários.
+  </p>
+  <app-code-block [code]="allMethodExample" />
+
+  <h2 class="font-semibold text-2xl">Realizando busca por chave primária</h2>
+  <p>
+    Para resgatar um registro através de sua chave primária (simples ou composta),
+    usa-se o método <b>find</b>, o qual retorna uma nova instância da model com os dados resgatados.
+  </p>
+  <app-code-block [code]="findMethodExample" />
+
+  <h2 class="font-semibold text-2xl">Buscando com filtros</h2>
+  <p>
+    Para realizar operações de filtro, usa-se o método <b>where</b>, com o qual é possível
+    construir um query builder encadeando métodos.
+  </p>
+  <p>
+    Ao final, deve-se especificar o método <b>fetch</b> para queries ou p <b>get</b> para scans.<br />
+    Caso os campos usados nos filtros não façam parte de nenhuma chave, o método chamado será o get.
+  </p>
+  <app-code-block [code]="queryBuilder" />
+  <p>Também é possível indicar qual o index que deve ser usado na que ry:</p>
+  <app-code-block [code]="queryBuilderIndex" />
+  <div>
+    Outros métodos aceitos no query builder:
+    <ul class="list-disc pl-6">
+      <li>or_where</li>
+      <li>where_not</li>
+      <li>or_where_not</li>
+      <li>where_in</li>
+      <li>where_between</li>
+      <li>limit</li>
+      <li>attributes_to_get</li>
+    </ul>
+  </div>
+</section>

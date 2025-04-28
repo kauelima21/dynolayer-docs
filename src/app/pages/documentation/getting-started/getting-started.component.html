@@ -1,0 +1,41 @@
+<section class="flex flex-col gap-5 mb-6">
+  <h2 class="font-semibold text-2xl">Introdução</h2>
+  <p>
+    O DynoLayer é uma ferramenta que simplifica e agiliza o acesso e
+    manipulação de dados no Amazon DynamoDB, baseada no padrão Active Record.
+  </p>
+  <p>Abaixo, você encontrará um guia de como instalar e começar a usar a biblioteca.</p>
+
+  <h2 class="font-semibold text-2xl">Instalação</h2>
+  <p>
+    Para adicionar o DynoLayer ao seu projeto python, basta utilizar o comando abaixo:
+  </p>
+  <app-code-block [code]="'pip install dynolayer'" language="bash" />
+  <p>
+    No caso de executar o código fora de uma AWS Lambda, usa-se o comando a seguir:
+  </p>
+  <app-code-block [code]="'pip install dynolayer[aws]'" language="bash" />
+
+  <h2 id="criando-uma-model" class="font-semibold text-2xl">Criando uma model</h2>
+  <p>
+    Para criar uma model utilizando o DynoLayer, é preciso criar a classe
+    que representará a entidade e fazer com que estenda a classe da lib.<br />
+    Como exemplo, segue a implementação de uma model <strong>User</strong>.
+  </p>
+  <app-code-block [code]="modelCode" />
+  <div>
+    Abaixo, o que cada parâmetro representa:
+    <ul>
+      <li><strong>entity:</strong> é o nome da tabela.</li>
+      <li><strong>required_fields:</strong> campos obrigatórios ao salvar um novo registro.</li>
+      <li>
+        <strong>fillable:</strong> campos que serão preenchidos quando utilizado
+        o método <strong>create</strong>.
+      </li>
+      <li>
+        <strong>timestamps:</strong> indica se os registros terão <b>created_at</b> e <b>updated_at</b>.
+        Por padrão, seu valor é <strong>True</strong>.
+      </li>
+    </ul>
+  </div>
+</section>

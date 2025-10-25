@@ -1,0 +1,7 @@
+import{a as s}from"./chunk-CHCN75MF.js";import{Aa as d,Ba as o,Ca as t,Da as a,Ka as e,la as m,ta as r}from"./chunk-JK3SF23V.js";import"./chunk-JL6EIR4O.js";var x=(()=>{class i{deleteCode=`
+    User.destroy({"id": 1}) # remover\xE1 o registro de id 1 da tabela
+
+    user = User.find({"id": 1}) # consulta e inst\xE2ncia o item
+    user.delete() # remove o registro
+  `;static \u0275fac=function(n){return new(n||i)};static \u0275cmp=r({type:i,selectors:[["app-removing-data"]],decls:26,vars:1,consts:[[1,"flex","flex-col","gap-5","mb-6","text-zinc-800"],[1,"font-semibold","text-2xl"],[3,"code"]],template:function(n,c){n&1&&(o(0,"section",0)(1,"h2",1),e(2,"Introdu\xE7\xE3o"),t(),o(3,"p"),e(4," No DynoLayer, \xE9 poss\xEDvel remover dados de duas formas: fazendo um "),o(5,"b"),e(6,"delete"),t(),e(7," ou um "),o(8,"b"),e(9,"destroy"),t(),e(10,". "),t(),o(11,"p"),e(12,"Abaixo, haver\xE3o exemplos de como implementar ambos os casos."),t(),o(13,"h2",1),e(14,"Removendo registros"),t(),o(15,"p"),e(16," Ambos os casos resultam na remo\xE7\xE3o de um item da tabela. Ao usar o "),o(17,"b"),e(18,"destroy"),t(),e(19,", basta indicar a chave prim\xE1ria e a\xE7\xE3o ser\xE1 executada."),a(20,"br"),e(21," No caso do "),o(22,"b"),e(23,"delete"),t(),e(24,", deve-se primeiro criar uma inst\xE2ncia da model com os dados do registro. "),t(),a(25,"app-code-block",2),t()),n&2&&(m(25),d("code",c.deleteCode))},dependencies:[s],encapsulation:2})}return i})();export{x as RemovingDataComponent};
+//# sourceMappingURL=chunk-D3EIS6AI.js.map

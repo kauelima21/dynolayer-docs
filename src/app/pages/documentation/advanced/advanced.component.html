@@ -1,0 +1,251 @@
+<article class="flex flex-col gap-6 mb-10 text-zinc-700 max-w-3xl">
+  <header>
+    <h1 class="text-3xl font-bold text-zinc-900 mb-2">Advanced</h1>
+    <p class="text-zinc-600">Configuração, paginação, transações, batch, polimorfismo e mais.</p>
+  </header>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Configuração</h2>
+    <p>Chame <code>DynoLayer.configure()</code> uma vez no início (handler da Lambda, bootstrap, etc).</p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">AWS Lambda (produção)</h3>
+    <app-code-block [code]="configLambda" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Desenvolvimento local</h3>
+    <p>LocalStack ou DynamoDB Local:</p>
+    <app-code-block [code]="configLocal" language="python" />
+    <p>AWS CLI profile:</p>
+    <app-code-block [code]="configProfile" language="python" />
+    <p>Credenciais explícitas:</p>
+    <app-code-block [code]="configCreds" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Retry automático</h3>
+    <p>Backoff automático para erros do DynamoDB (throttling, etc):</p>
+    <app-code-block [code]="configRetry" language="python" />
+    <p>O modo <code>adaptive</code> ajusta a taxa de requests baseado nos erros de throttling.</p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Timestamps</h2>
+    <p>Gerenciamento automático de <code>created_at</code> e <code>updated_at</code>.</p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Habilitando</h3>
+    <app-code-block [code]="tsEnable" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Formatos</h3>
+    <ul class="list-disc list-inside">
+      <li><b>numeric</b> (<code>int</code>): <code>1735132800</code> (Unix timestamp)</li>
+      <li><b>iso</b> (<code>str</code>): <code>"2026-04-05T14:30:00-03:00"</code> (ISO 8601 com timezone)</li>
+    </ul>
+    <p>Configuração global:</p>
+    <app-code-block [code]="tsConfigGlobal" language="python" />
+    <p>Override por model:</p>
+    <app-code-block [code]="tsOverride" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Exemplos</h3>
+    <app-code-block [code]="tsExamples" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Timezone</h3>
+    <p>Default <code>America/Sao_Paulo</code>. Para alterar:</p>
+    <app-code-block [code]="tsTimezone" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Auto-ID</h2>
+    <p>Geração automática de IDs para a partition key. Por model.</p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Estratégias</h3>
+    <ul class="list-disc list-inside">
+      <li><code>"uuid4"</code> — UUID v4 aleatório (recomendado)</li>
+      <li><code>"uuid1"</code> — UUID v1 (time-based + MAC)</li>
+      <li><code>"uuid7"</code> — UUID v7 time-ordered (Python 3.14+, fallback uuid4)</li>
+      <li><code>"numeric"</code> — inteiro incremental via tabela de sequências</li>
+    </ul>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">UUID</h3>
+    <app-code-block [code]="autoIdUuid" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">UUID truncado</h3>
+    <p>Use <code>auto_id_length</code> para IDs mais curtos (16-32 hex):</p>
+    <app-code-block [code]="autoIdUuidShort" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Numérico incremental</h3>
+    <p>Tabela auxiliar com contadores atômicos. Seguro para execuções concorrentes (múltiplas Lambdas).</p>
+    <p class="text-sm text-zinc-500">Setup da tabela de sequências:</p>
+    <app-code-block [code]="autoIdNumericTable" language="bash" />
+    <app-code-block [code]="autoIdNumericUse" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Tabela customizada</h3>
+    <p>Por model:</p>
+    <app-code-block [code]="autoIdCustomTable" language="python" />
+    <p>Globalmente:</p>
+    <app-code-block [code]="autoIdGlobalTable" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Comportamento</h3>
+    <ul class="list-disc list-inside">
+      <li>ID gerado <b>apenas</b> quando a partition key não está presente nos dados</li>
+      <li>Funciona com <code>create()</code>, <code>batch_create()</code> e <code>save()</code></li>
+      <li>Em <code>batch_create()</code> com <code>numeric</code>, IDs gerados em uma única chamada atômica</li>
+    </ul>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Batch operations</h2>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">batch_create</h3>
+    <app-code-block [code]="batchCreate" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">batch_find</h3>
+    <app-code-block [code]="batchFind" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">batch_destroy</h3>
+    <app-code-block [code]="batchDestroy" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Chunking automático</h3>
+    <ul class="list-disc list-inside">
+      <li><b>Write/Delete:</b> 25 itens por batch</li>
+      <li><b>Get:</b> 100 itens por batch</li>
+    </ul>
+    <p>Itens não processados são reenviados automaticamente.</p>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">create() vs save()</h2>
+    <ul class="list-disc list-inside">
+      <li><b>create()</b> → <code>PutItem</code> — substitui o item inteiro</li>
+      <li><b>save()</b> → <code>UpdateItem</code> — upsert (cria ou atualiza campos específicos)</li>
+    </ul>
+    <app-code-block [code]="createVsSave" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Escrita condicional (unique create)</h3>
+    <app-code-block [code]="createUnique" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Condição no save()</h3>
+    <app-code-block [code]="saveCondition" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Transações</h2>
+    <p>Transações atômicas do DynamoDB (até 25 operações, all-or-nothing).</p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Escrita transacional</h3>
+    <app-code-block [code]="transactWrite" language="python" />
+    <p>Helpers: <code>prepare_put(data)</code>, <code>prepare_delete(key)</code>, <code>prepare_update(key, data)</code>.</p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Leitura transacional</h3>
+    <app-code-block [code]="transactRead" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Paginação</h2>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Automática</h3>
+    <p>Use <code>paginate=True</code> + <code>all=True</code>:</p>
+    <app-code-block [code]="pagAuto" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Manual</h3>
+    <p>Para controle fino (útil em APIs):</p>
+    <app-code-block [code]="pagManual" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Count otimizado</h3>
+    <p>Usa <code>Select='COUNT'</code> do DynamoDB — não transfere dados:</p>
+    <app-code-block [code]="countOpt" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Method overriding (polimorfismo)</h2>
+    <p>Sobrescreva métodos do DynoLayer para customizar comportamento.</p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Validação customizada</h3>
+    <app-code-block [code]="overrideValidation" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Lógica de negócio customizada</h3>
+    <app-code-block [code]="overrideBusiness" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Validação de campos</h2>
+    <p>Apenas campos em <code>fillable</code> podem ser atribuídos:</p>
+    <app-code-block [code]="fillableExample" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Tipos de dados complexos</h2>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Objetos aninhados</h3>
+    <app-code-block [code]="nestedObjects" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Listas</h3>
+    <app-code-block [code]="lists" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Precisão numérica</h3>
+    <p>O DynamoDB requer <code>Decimal</code>. O DynoLayer converte floats automaticamente:</p>
+    <app-code-block [code]="decimal" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Otimização para Lambda</h2>
+    <p>Declarar <code>partition_key</code> e <code>sort_key</code> evita <code>describe_table</code> no init — elimina API call no cold start.</p>
+    <app-code-block [code]="lambdaKeys" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Projeção no find</h3>
+    <app-code-block [code]="projectionFind" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Streaming para tabelas grandes</h3>
+    <p>Use <code>stream()</code> em vez de <code>get(all=True, paginate=True)</code> — previne OOM em Lambda (128MB default):</p>
+    <app-code-block [code]="streamCode" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Acesso a campos via dicionário</h2>
+    <p>Campos com nome igual a métodos (<code>data</code>, <code>save</code>, <code>get</code>, <code>count</code>...) são inacessíveis via atributo. Use sintaxe de dicionário:</p>
+    <app-code-block [code]="dictAccess" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Modo silencioso (raise_on_error)</h2>
+    <p>A partir da v2.0, o DynoLayer opera em modo silencioso por default — exceções suprimidas, métodos retornam indicadores de falha. Acesse o erro via <code>fail()</code>.</p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Reativando exceções (v1.x)</h3>
+    <app-code-block [code]="raiseEnable" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Retornos no modo silencioso</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border border-zinc-200 rounded-md">
+        <thead class="bg-zinc-100"><tr><th class="text-left p-2">Método</th><th class="text-left p-2">Retorno em erro</th></tr></thead>
+        <tbody class="divide-y divide-zinc-200 font-mono">
+          <tr><td class="p-2">get_item()</td><td class="p-2">None</td></tr>
+          <tr><td class="p-2">create()</td><td class="p-2">None</td></tr>
+          <tr><td class="p-2">delete()</td><td class="p-2">False</td></tr>
+          <tr><td class="p-2">find_or_fail()</td><td class="p-2">None</td></tr>
+          <tr><td class="p-2">batch_create()</td><td class="p-2">[]</td></tr>
+          <tr><td class="p-2">batch_find()</td><td class="p-2">Collection([])</td></tr>
+          <tr><td class="p-2">batch_destroy()</td><td class="p-2">False</td></tr>
+          <tr><td class="p-2">save()</td><td class="p-2">False</td></tr>
+          <tr><td class="p-2">destroy()</td><td class="p-2">False</td></tr>
+          <tr><td class="p-2">get()</td><td class="p-2">Collection([])</td></tr>
+          <tr><td class="p-2">count()</td><td class="p-2">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Acessando o erro com fail()</h3>
+    <app-code-block [code]="failClass" language="python" />
+    <p class="text-sm text-zinc-500"><b>Nota:</b> <code>fail()</code> é resetado a cada nova operação. Consulte logo após.</p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Quando usar</h3>
+    <p>Útil em pipelines onde uma falha individual não deve interromper o fluxo:</p>
+    <app-code-block [code]="silentPipeline" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Boas práticas</h2>
+    <ul class="list-disc list-inside flex flex-col gap-1.5">
+      <li>Use índices nas suas queries — evite <code>force_scan()</code></li>
+      <li>Sempre limite resultados com <code>limit()</code></li>
+      <li>Use projeção (<code>attributes_to_get()</code>) para reduzir payload</li>
+      <li>Prefira batch operations a chamadas individuais</li>
+      <li>Valide dados nos seus models (override de <code>save()</code>)</li>
+    </ul>
+  </section>
+</article>

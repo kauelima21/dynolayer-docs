@@ -1,0 +1,92 @@
+<article class="flex flex-col gap-6 mb-10 text-zinc-700 max-w-3xl">
+  <header>
+    <h1 class="text-3xl font-bold text-zinc-900 mb-2">Collections</h1>
+    <p class="text-zinc-600">Wrappers iteráveis para os resultados de query, com métodos utilitários.</p>
+  </header>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">O que é uma Collection?</h2>
+    <p>Wrapper iterável em torno do resultado de uma query, com métodos para manipulação.</p>
+    <app-code-block [code]="whatIs" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Iterando</h2>
+    <app-code-block [code]="iterating" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Métodos</h2>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">first()</h3>
+    <p>Primeiro item ou <code>None</code>:</p>
+    <app-code-block [code]="first" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">count()</h3>
+    <app-code-block [code]="count" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">len()</h3>
+    <p>Suporta <code>len()</code> built-in do Python:</p>
+    <app-code-block [code]="lenCode" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">pluck()</h3>
+    <p>Extrai um único atributo de todos os itens:</p>
+    <app-code-block [code]="pluck" language="python" />
+    <p>Itens sem o atributo retornam <code>None</code>:</p>
+    <app-code-block [code]="pluckMissing" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">to_list()</h3>
+    <p>Converte para lista de dicts:</p>
+    <app-code-block [code]="toList" language="python" />
+    <p>Útil para serialização JSON ou templates:</p>
+    <app-code-block [code]="toListJson" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Trabalhando com itens individuais</h2>
+    <p>Cada item é uma instância do model com acesso por atributo:</p>
+    <app-code-block [code]="individual" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Exemplos práticos</h2>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Verificar se há resultados</h3>
+    <app-code-block [code]="exExist" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Primeiro ou default</h3>
+    <app-code-block [code]="exFirstDefault" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Extrair dados específicos</h3>
+    <app-code-block [code]="exExtract" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Processar e transformar</h3>
+    <app-code-block [code]="exTransform" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Combinar com outras operações</h3>
+    <app-code-block [code]="exCombine" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Method reference</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border border-zinc-200 rounded-md">
+        <thead class="bg-zinc-100"><tr><th class="text-left p-2">Method</th><th class="text-left p-2">Returns</th><th class="text-left p-2">Descrição</th></tr></thead>
+        <tbody class="divide-y divide-zinc-200">
+          <tr><td class="p-2 font-mono">first()</td><td class="p-2">Model | None</td><td class="p-2">Primeiro item ou None</td></tr>
+          <tr><td class="p-2 font-mono">count()</td><td class="p-2">int</td><td class="p-2">Quantidade de itens</td></tr>
+          <tr><td class="p-2 font-mono">len()</td><td class="p-2">int</td><td class="p-2">Suporte a len() Python</td></tr>
+          <tr><td class="p-2 font-mono">pluck(key)</td><td class="p-2">list</td><td class="p-2">Extrai atributo de todos os itens</td></tr>
+          <tr><td class="p-2 font-mono">to_list()</td><td class="p-2">list[dict]</td><td class="p-2">Converte para lista de dicts</td></tr>
+          <tr><td class="p-2 font-mono">__iter__()</td><td class="p-2">iterator</td><td class="p-2">Iteração</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Collections vazias</h2>
+    <p>Todos os métodos lidam com collections vazias com segurança:</p>
+    <app-code-block [code]="empty" language="python" />
+  </section>
+</article>

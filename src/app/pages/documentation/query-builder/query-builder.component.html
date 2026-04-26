@@ -1,0 +1,141 @@
+<article class="flex flex-col gap-6 mb-10 text-zinc-700 max-w-3xl">
+  <header>
+    <h1 class="text-3xl font-bold text-zinc-900 mb-2">Query Builder</h1>
+    <p class="text-zinc-600">API fluente e encadeável para construir queries e scans.</p>
+  </header>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Expression queries (find)</h2>
+    <p>O método <code>find()</code> oferece uma API expressiva para construir queries e scans com expression strings.</p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Sintaxe básica</h3>
+    <app-code-block [code]="findBasic" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Operadores suportados</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border border-zinc-200 rounded-md">
+        <thead class="bg-zinc-100"><tr><th class="text-left p-2">Operador</th><th class="text-left p-2">Sintaxe</th><th class="text-left p-2">Exemplo</th></tr></thead>
+        <tbody class="divide-y divide-zinc-200 font-mono">
+          <tr><td class="p-2">Igual</td><td class="p-2">attr = :val</td><td class="p-2">"user_id = :uid"</td></tr>
+          <tr><td class="p-2">Diferente</td><td class="p-2">attr &lt;&gt; :val</td><td class="p-2">"status &lt;&gt; :s"</td></tr>
+          <tr><td class="p-2">Menor que</td><td class="p-2">attr &lt; :val</td><td class="p-2">"age &lt; :max"</td></tr>
+          <tr><td class="p-2">Menor ou igual</td><td class="p-2">attr &lt;= :val</td><td class="p-2">"age &lt;= :max"</td></tr>
+          <tr><td class="p-2">Maior que</td><td class="p-2">attr &gt; :val</td><td class="p-2">"age &gt; :min"</td></tr>
+          <tr><td class="p-2">Maior ou igual</td><td class="p-2">attr &gt;= :val</td><td class="p-2">"age &gt;= :min"</td></tr>
+          <tr><td class="p-2">Começa com</td><td class="p-2">attr begins_with :val</td><td class="p-2">"name begins_with :prefix"</td></tr>
+          <tr><td class="p-2">Contém</td><td class="p-2">attr contains :val</td><td class="p-2">"tags contains :tag"</td></tr>
+          <tr><td class="p-2">Está em</td><td class="p-2">attr in :val</td><td class="p-2">"status in :list"</td></tr>
+          <tr><td class="p-2">Entre</td><td class="p-2">attr between :s and :e</td><td class="p-2">"age between :min and :max"</td></tr>
+          <tr><td class="p-2">Existe</td><td class="p-2">attr exists</td><td class="p-2">"email exists"</td></tr>
+          <tr><td class="p-2">Não existe</td><td class="p-2">attr not_exists</td><td class="p-2">"phone not_exists"</td></tr>
+          <tr><td class="p-2">Tipo do attr</td><td class="p-2">attr attribute_type :val</td><td class="p-2">"data attribute_type :t"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Conectores lógicos</h3>
+    <p>Disponíveis: <code>AND</code>, <code>OR</code>, <code>AND NOT</code>, <code>OR NOT</code>.</p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Exemplos completos</h3>
+    <app-code-block [code]="findExamples" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Where Query Builder</h2>
+    <p>API encadeada com <code>where()</code>:</p>
+    <app-code-block [code]="whereSimple" language="python" />
+    <p>Operadores: <code>=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;&gt;</code>, <code>begins_with</code>, <code>contains</code>.</p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">AND</h3>
+    <app-code-block [code]="whereAnd" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">OR</h3>
+    <app-code-block [code]="whereOr" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">NOT</h3>
+    <app-code-block [code]="whereNot" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Filtros avançados</h2>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Range (BETWEEN)</h3>
+    <app-code-block [code]="whereBetween" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">IN</h3>
+    <app-code-block [code]="whereIn" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">String operations</h3>
+    <app-code-block [code]="whereString" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Usando índices</h2>
+    <p>O DynamoDB requer índices para queries eficientes. Use <code>index()</code> para escolher o GSI.</p>
+    <app-code-block [code]="indexes" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Limitando resultados</h2>
+    <app-code-block [code]="limits" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Selecionando atributos específicos</h2>
+    <p>Use <code>attributes_to_get()</code> para projeção (similar ao SQL SELECT):</p>
+    <app-code-block [code]="projection" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Query vs Scan</h2>
+    <p>O DynamoDB tem dois modos de leitura:</p>
+    <ul class="list-disc list-inside">
+      <li><b>Query:</b> rápido, usa índices, requer condição na chave</li>
+      <li><b>Scan:</b> lento, lê tabela inteira — para filtros sem chave</li>
+    </ul>
+    <p>O DynoLayer escolhe automaticamente. Para forçar scan:</p>
+    <app-code-block [code]="forceScan" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Recuperando resultados</h2>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">get() vs fetch()</h3>
+    <p><code>fetch()</code> é alias de <code>get()</code>:</p>
+    <app-code-block [code]="getFetch" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Paginação</h3>
+    <p>Por padrão o DynamoDB retorna até 1MB. Use <code>paginate=True</code> para percorrer todas as páginas. Combine com <code>all=True</code> para obter a Collection completa:</p>
+    <app-code-block [code]="pagination" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Exemplo completo</h2>
+    <app-code-block [code]="completeExample" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Method reference</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border border-zinc-200 rounded-md">
+        <thead class="bg-zinc-100"><tr><th class="text-left p-2">Method</th><th class="text-left p-2">Descrição</th></tr></thead>
+        <tbody class="divide-y divide-zinc-200">
+          <tr><td class="p-2 font-mono">find(expression, **values)</td><td class="p-2">Query/scan unificado com expression string</td></tr>
+          <tr><td class="p-2 font-mono">where(attr, op, val)</td><td class="p-2">Adiciona WHERE</td></tr>
+          <tr><td class="p-2 font-mono">and_where(attr, op, val)</td><td class="p-2">AND</td></tr>
+          <tr><td class="p-2 font-mono">or_where(attr, op, val)</td><td class="p-2">OR</td></tr>
+          <tr><td class="p-2 font-mono">where_not(attr, op, val)</td><td class="p-2">NOT</td></tr>
+          <tr><td class="p-2 font-mono">or_where_not(attr, op, val)</td><td class="p-2">OR NOT</td></tr>
+          <tr><td class="p-2 font-mono">where_between(attr, s, e)</td><td class="p-2">BETWEEN</td></tr>
+          <tr><td class="p-2 font-mono">where_in(attr, values)</td><td class="p-2">IN</td></tr>
+          <tr><td class="p-2 font-mono">index(name)</td><td class="p-2">Define GSI/LSI</td></tr>
+          <tr><td class="p-2 font-mono">limit(count)</td><td class="p-2">Limita resultados</td></tr>
+          <tr><td class="p-2 font-mono">attributes_to_get(attrs)</td><td class="p-2">Projeção</td></tr>
+          <tr><td class="p-2 font-mono">force_scan()</td><td class="p-2">Força scan</td></tr>
+          <tr><td class="p-2 font-mono">get(all=False, paginate=False)</td><td class="p-2">Executa query</td></tr>
+          <tr><td class="p-2 font-mono">fetch(...)</td><td class="p-2">Alias de get()</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</article>

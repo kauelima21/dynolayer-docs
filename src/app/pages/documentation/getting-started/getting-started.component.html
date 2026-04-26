@@ -1,41 +1,117 @@
-<section class="flex flex-col gap-5 mb-6">
-  <h2 class="font-semibold text-2xl">Introdução</h2>
-  <p>
-    O DynoLayer é uma ferramenta que simplifica e agiliza o acesso e
-    manipulação de dados no Amazon DynamoDB, baseada no padrão Active Record.
-  </p>
-  <p>Abaixo, você encontrará um guia de como instalar e começar a usar a biblioteca.</p>
+<article class="flex flex-col gap-6 mb-10 text-zinc-700 max-w-3xl">
+  <header>
+    <h1 class="text-3xl font-bold text-zinc-900 mb-2">Comece a usar</h1>
+    <p class="text-zinc-600">Instale, configure e crie seu primeiro model em minutos.</p>
+  </header>
 
-  <h2 class="font-semibold text-2xl">Instalação</h2>
-  <p>
-    Para adicionar o DynoLayer ao seu projeto python, basta utilizar o comando abaixo:
-  </p>
-  <app-code-block [code]="'pip install dynolayer'" language="bash" />
-  <p>
-    No caso de executar o código fora de uma AWS Lambda, usa-se o comando a seguir:
-  </p>
-  <app-code-block [code]="'pip install dynolayer[aws]'" language="bash" />
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Instalação</h2>
+    <p>Instale o DynoLayer via pip:</p>
+    <app-code-block [code]="installBasic" language="bash" />
+    <p>Ou com <code>boto3</code> incluído:</p>
+    <app-code-block [code]="installFull" language="bash" />
+    <p class="text-sm text-zinc-500"><b>Requer Python 3.9+</b></p>
+  </section>
 
-  <h2 id="criando-uma-model" class="font-semibold text-2xl">Criando uma model</h2>
-  <p>
-    Para criar uma model utilizando o DynoLayer, é preciso criar a classe
-    que representará a entidade e fazer com que estenda a classe da lib.<br />
-    Como exemplo, segue a implementação de uma model <strong>User</strong>.
-  </p>
-  <app-code-block [code]="modelCode" />
-  <div>
-    Abaixo, o que cada parâmetro representa:
-    <ul>
-      <li><strong>entity:</strong> é o nome da tabela.</li>
-      <li><strong>required_fields:</strong> campos obrigatórios ao salvar um novo registro.</li>
-      <li>
-        <strong>fillable:</strong> campos que serão preenchidos quando utilizado
-        o método <strong>create</strong>.
-      </li>
-      <li>
-        <strong>timestamps:</strong> indica se os registros terão <b>created_at</b> e <b>updated_at</b>.
-        Por padrão, seu valor é <strong>True</strong>.
-      </li>
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Configuração</h2>
+    <p>Chame <code>DynoLayer.configure()</code> uma vez no início da aplicação:</p>
+    <app-code-block [code]="configureBasic" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Em AWS Lambda (produção)</h3>
+    <p>Credenciais vêm do IAM Role automaticamente. Configure só o que precisar:</p>
+    <app-code-block [code]="configureLambda" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Em desenvolvimento local</h3>
+    <p>Com LocalStack:</p>
+    <app-code-block [code]="configureLocalstack" language="python" />
+    <p>Com AWS CLI profile:</p>
+    <app-code-block [code]="configureProfile" language="python" />
+    <p>Com credenciais explícitas:</p>
+    <app-code-block [code]="configureCreds" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Prioridade de resolução</h3>
+    <pre class="rounded-md bg-zinc-100 px-4 py-3 text-sm font-mono text-zinc-700 whitespace-pre-wrap">parâmetro do model  →  DynoLayer.configure()  →  variáveis de ambiente  →  defaults</pre>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Opções disponíveis</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border border-zinc-200 rounded-md">
+        <thead class="bg-zinc-100 text-zinc-700">
+          <tr>
+            <th class="text-left p-2">Opção</th>
+            <th class="text-left p-2">Padrão</th>
+            <th class="text-left p-2">Descrição</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-200">
+          <tr><td class="p-2 font-mono">region</td><td class="p-2 font-mono">AWS_REGION ou "sa-east-1"</td><td class="p-2">Região AWS</td></tr>
+          <tr><td class="p-2 font-mono">endpoint_url</td><td class="p-2 font-mono">None</td><td class="p-2">URL customizada (LocalStack, DynamoDB Local)</td></tr>
+          <tr><td class="p-2 font-mono">aws_access_key_id</td><td class="p-2 font-mono">None</td><td class="p-2">Chave de acesso AWS</td></tr>
+          <tr><td class="p-2 font-mono">aws_secret_access_key</td><td class="p-2 font-mono">None</td><td class="p-2">Chave secreta AWS</td></tr>
+          <tr><td class="p-2 font-mono">profile_name</td><td class="p-2 font-mono">None</td><td class="p-2">Nome do perfil AWS CLI</td></tr>
+          <tr><td class="p-2 font-mono">timestamp_format</td><td class="p-2 font-mono">"iso"</td><td class="p-2">"iso" (ISO 8601) ou "numeric" (unix int)</td></tr>
+          <tr><td class="p-2 font-mono">timestamp_timezone</td><td class="p-2 font-mono">"America/Sao_Paulo"</td><td class="p-2">Timezone para timestamps</td></tr>
+          <tr><td class="p-2 font-mono">retry_max_attempts</td><td class="p-2 font-mono">3</td><td class="p-2">Máximo de tentativas para retry</td></tr>
+          <tr><td class="p-2 font-mono">retry_mode</td><td class="p-2 font-mono">"adaptive"</td><td class="p-2">"standard" ou "adaptive"</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Seu primeiro model</h2>
+    <p>O DynoLayer segue o padrão Active Record. Cada classe model representa uma tabela DynamoDB.</p>
+    <app-code-block [code]="modelCode" language="python" />
+    <p class="text-sm text-zinc-500">
+      <b>Nota:</b> <code>partition_key</code> tem default <code>"id"</code>. Para tabelas com partition key diferente, declare explicitamente: <code>partition_key="user_id"</code>.
+    </p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Parâmetros do model</h3>
+    <ul class="list-disc list-inside flex flex-col gap-1.5">
+      <li><b>entity:</b> nome da tabela DynamoDB</li>
+      <li><b>required_fields:</b> campos obrigatórios ao criar registros</li>
+      <li><b>fillable:</b> whitelist de campos para mass assignment</li>
+      <li><b>timestamps:</b> adiciona <code>created_at</code> e <code>updated_at</code></li>
+      <li><b>timestamp_format:</b> override do formato (<code>"numeric"</code> ou <code>"iso"</code>)</li>
+      <li><b>auto_id:</b> estratégia de ID automático (<code>"uuid4"</code>, <code>"uuid1"</code>, <code>"uuid7"</code>, <code>"numeric"</code>)</li>
+      <li><b>auto_id_length:</b> tamanho do UUID truncado (16-32)</li>
+      <li><b>auto_id_table:</b> tabela de sequências para IDs numéricos (default: <code>"dynolayer_sequences"</code>)</li>
+      <li><b>partition_key:</b> default <code>"id"</code></li>
+      <li><b>sort_key:</b> opcional, apenas se a tabela tiver sort key</li>
     </ul>
-  </div>
-</section>
+  </section>
+
+  <section class="flex flex-col gap-3">
+    <h2 class="text-2xl font-semibold text-zinc-900">Uso básico</h2>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Criar um registro</h3>
+    <app-code-block [code]="createCode" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Criar com ID automático</h3>
+    <app-code-block [code]="autoIdCode" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Criar em lote</h3>
+    <app-code-block [code]="batchCreateCode" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Buscar registros</h3>
+    <app-code-block [code]="fetchCode" language="python" />
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Atualizar um registro</h3>
+    <app-code-block [code]="updateCode" language="python" />
+    <p class="text-sm text-zinc-500">
+      <b>Dica:</b> use <code>user["campo"]</code> quando o nome do campo pode colidir com métodos da classe (como <code>data</code>, <code>get</code>, <code>save</code>).
+    </p>
+
+    <h3 class="text-lg font-semibold text-zinc-900 mt-2">Deletar um registro</h3>
+    <app-code-block [code]="deleteCode" language="python" />
+  </section>
+
+  <section class="flex flex-col gap-2 p-4 rounded-md border border-zinc-200 bg-zinc-50">
+    <h2 class="text-lg font-semibold text-zinc-900">Próximos passos</h2>
+    <ul class="list-disc list-inside text-zinc-600">
+      <li><a routerLink="/docs/query-builder" class="text-sky-500 hover:underline">Query Builder</a> — filtros avançados</li>
+      <li><a routerLink="/docs/collections" class="text-sky-500 hover:underline">Collections</a> — trabalhar com conjuntos de resultados</li>
+      <li><a routerLink="/docs/advanced" class="text-sky-500 hover:underline">Advanced</a> — paginação, timestamps, transações e mais</li>
+    </ul>
+  </section>
+</article>

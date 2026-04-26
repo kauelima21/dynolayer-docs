@@ -1,0 +1,74 @@
+<section class="flex flex-col items-center text-center gap-6 py-12 lg:py-20">
+  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 text-sky-500 text-xs font-medium">
+    <i class="icon-sparkles"></i>
+    DynamoDB ORM em Python
+  </span>
+
+  <h1 class="text-4xl lg:text-6xl font-bold tracking-tight text-zinc-900 leading-[1.05] max-w-3xl">
+    DynamoDB sem boilerplate.<br />
+    <span class="text-sky-500">Modelo, persiste, consulta.</span>
+  </h1>
+
+  <p class="text-lg text-zinc-600 max-w-2xl">
+    DynoLayer é um ORM minimalista para DynamoDB. Defina seus modelos, persista, consulte e remova
+    dados com uma API enxuta — sem se perder em <code class="px-1.5 py-0.5 rounded bg-zinc-100 text-sky-600 text-sm">PutItem</code>,
+    <code class="px-1.5 py-0.5 rounded bg-zinc-100 text-sky-600 text-sm">QueryInput</code> e <code class="px-1.5 py-0.5 rounded bg-zinc-100 text-sky-600 text-sm">ExpressionAttributeNames</code>.
+  </p>
+
+  <div class="flex flex-wrap items-center justify-center gap-3">
+    <a
+      routerLink="/docs/getting-started"
+      class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-sky-500 text-white font-semibold hover:bg-sky-600 transition-colors"
+    >
+      Comece a usar
+      <i class="icon-arrow-right"></i>
+    </a>
+    <a
+      href="https://github.com/kauelima21/dynolayer"
+      target="_blank"
+      rel="noopener"
+      class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-zinc-200 text-zinc-700 font-semibold hover:border-sky-500 hover:text-sky-500 transition-colors"
+    >
+      <i class="icon-github"></i>
+      GitHub
+    </a>
+  </div>
+
+  <pre class="mt-4 px-5 py-3 rounded-md bg-zinc-100 text-zinc-700 text-sm font-mono inline-flex items-center gap-3">
+    <span class="text-zinc-500 select-none">$</span>
+    <span>pip install dynolayer</span>
+  </pre>
+</section>
+
+<section class="grid grid-cols-1 md:grid-cols-3 gap-4 pb-16">
+  <article class="p-6 rounded-lg border border-zinc-200 bg-zinc-50 hover:border-sky-500 transition-colors">
+    <div class="inline-flex items-center justify-center w-10 h-10 rounded-md bg-sky-50 text-sky-500 mb-4">
+      <svg aria-hidden="true" viewBox="0 0 512 512" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M505.12019,19.09375c-1.18945-5.53125-6.65819-11-12.207-12.1875C460.716,0,435.507,0,410.40747,0,307.17523,0,245.26909,55.20312,199.05238,128H94.83772c-16.34763.01562-35.55658,11.875-42.88664,26.48438L2.51562,253.29688A28.4,28.4,0,0,0,0,264a24.00867,24.00867,0,0,0,24.00582,24H127.81618l-22.47457,22.46875c-11.36521,11.36133-12.99607,32.25781,0,45.25L156.24582,406.625c11.15623,11.1875,32.15619,13.15625,45.27726,0l22.47457-22.46875V488a24.00867,24.00867,0,0,0,24.00581,24,28.55934,28.55934,0,0,0,10.707-2.51562l98.72834-49.39063c14.62888-7.29687,26.50776-26.5,26.50776-42.85937V312.79688c72.59753-46.3125,128.03493-108.40626,128.03493-211.09376C512.07526,76.5,512.07526,51.29688,505.12019,19.09375ZM384.04033,168A40,40,0,1,1,424.05,128,40.02322,40.02322,0,0,1,384.04033,168Z"/></svg>
+    </div>
+    <h3 class="text-lg font-semibold text-zinc-900 mb-1">API enxuta</h3>
+    <p class="text-zinc-600 text-sm">
+      <code class="font-mono">.create()</code>, <code class="font-mono">.find()</code>,
+      <code class="font-mono">.save()</code>, <code class="font-mono">.destroy()</code>. Nada de SDK cru.
+    </p>
+  </article>
+
+  <article class="p-6 rounded-lg border border-zinc-200 bg-zinc-50 hover:border-sky-500 transition-colors">
+    <div class="inline-flex items-center justify-center w-10 h-10 rounded-md bg-sky-50 text-sky-500 mb-4">
+      <i class="icon-shield text-xl"></i>
+    </div>
+    <h3 class="text-lg font-semibold text-zinc-900 mb-1">Validação built-in</h3>
+    <p class="text-zinc-600 text-sm">
+      Campos obrigatórios, IDs automáticos (UUID v4 ou numérico) e timestamps já vêm prontos.
+    </p>
+  </article>
+
+  <article class="p-6 rounded-lg border border-zinc-200 bg-zinc-50 hover:border-sky-500 transition-colors">
+    <div class="inline-flex items-center justify-center w-10 h-10 rounded-md bg-sky-50 text-sky-500 mb-4">
+      <i class="icon-stack text-xl"></i>
+    </div>
+    <h3 class="text-lg font-semibold text-zinc-900 mb-1">Query builder</h3>
+    <p class="text-zinc-600 text-sm">
+      Filtros, índices secundários, paginação e <code class="font-mono">batch_create</code> sem montar expressão na mão.
+    </p>
+  </article>
+</section>

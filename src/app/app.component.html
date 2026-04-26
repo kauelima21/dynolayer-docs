@@ -1,17 +1,19 @@
-<div class="flex flex-col lg:gap-8 gap-4 mx-auto max-w-7xl px-8 py-4">
+<div class="flex flex-col lg:gap-8 gap-4 mx-auto max-w-7xl px-8 py-4 min-h-screen">
   <header class="flex items-center justify-between flex-wrap gap-4">
-    <strong class="flex items-center gap-1">
-      <img src="logo.svg" />
-      <span class="text-zinc-900 font-semibold text-lg">DynoLayer</span>
-    </strong>
+    <a routerLink="/" class="flex items-center gap-2 group">
+      <i class="icon-mug text-2xl text-sky-500"></i>
+      <span class="text-zinc-900 font-semibold text-lg tracking-tight">DynoLayer</span>
+    </a>
 
     <nav class="basis-full md:basis-auto">
-      <ul class="flex gap-4">
+      <ul class="flex items-center gap-2">
         <li>
           <a
-            class="cursor-pointer flex items-center gap-1.5 p-1.5 text-sky-500 text-base font-semibold hover:text-sky-500"
+            routerLink="/docs"
+            routerLinkActive="text-sky-500"
+            class="flex items-center gap-1.5 p-1.5 px-3 rounded-md text-zinc-600 text-base font-medium hover:text-sky-500 hover:bg-sky-50 transition-colors"
           >
-            <i class="ph ph-book-open"></i>
+            <i class="icon-books"></i>
             <span>Documentação</span>
           </a>
         </li>
@@ -19,11 +21,22 @@
           <a
             href="https://github.com/kauelima21/dynolayer"
             target="_blank"
-            class="flex items-center gap-1.5 p-1.5 text-zinc-600 text-base font-semibold hover:text-sky-500"
+            rel="noopener"
+            class="flex items-center gap-1.5 p-1.5 px-3 rounded-md text-zinc-600 text-base font-medium hover:text-sky-500 hover:bg-sky-50 transition-colors"
           >
-            <i class="ph ph-github-logo"></i>
+            <i class="icon-github"></i>
             <span>Código fonte</span>
           </a>
+        </li>
+        <li>
+          <button
+            type="button"
+            (click)="toggleTheme()"
+            [attr.aria-label]="isDark() ? 'Ativar tema claro' : 'Ativar tema escuro'"
+            class="flex items-center justify-center p-2 rounded-md text-zinc-600 hover:text-sky-500 hover:bg-sky-50 transition-colors"
+          >
+            <i [class]="isDark() ? 'icon-sun' : 'icon-moon'"></i>
+          </button>
         </li>
       </ul>
     </nav>
@@ -31,5 +44,5 @@
 
   <router-outlet />
 
-  <app-footer />
+  <app-footer class="mt-auto" />
 </div>

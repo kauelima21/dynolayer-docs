@@ -1,2 +1,94 @@
-/* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Space Grotesk", "Helvetica", system-ui, sans-serif;
+  --font-mono: "Source Code Pro", ui-monospace, monospace;
+
+  --color-brand-50: #f1ebff;
+  --color-brand-100: #e3d6ff;
+  --color-brand-200: #c8adff;
+  --color-brand-300: #a98aff;
+  --color-brand-400: #9069ee;
+  --color-brand-500: #7D54DE;
+  --color-brand-600: #6a44c8;
+  --color-brand-700: #5D36B4;
+  --color-brand-800: #4a2a91;
+  --color-brand-900: #3a1d7a;
+
+  --color-success: #61CE70;
+  --color-success-strong: #54DE79;
+  --color-danger: #DE545B;
+  --color-warning: #DED254;
+}
+
+@layer base {
+  :root {
+    --color-zinc-50: #ffffff;
+    --color-zinc-100: #f7f7f8;
+    --color-zinc-200: #ececef;
+    --color-zinc-300: #BDBDBD;
+    --color-zinc-400: #9aa0a6;
+    --color-zinc-500: #7A7A7A;
+    --color-zinc-600: #54595F;
+    --color-zinc-700: #54595F;
+    --color-zinc-800: #2a2c30;
+    --color-zinc-900: #000000;
+
+    --color-sky-50: #f1ebff;
+    --color-sky-100: #e3d6ff;
+    --color-sky-300: #a98aff;
+    --color-sky-500: #7D54DE;
+    --color-sky-600: #6a44c8;
+    --color-sky-700: #5D36B4;
+    --color-sky-900: #3a1d7a;
+
+    --bg-page: #ffffff;
+    --bg-surface: #ffffff;
+    --bg-surface-2: #f7f7f8;
+    --border-subtle: #ececef;
+  }
+
+  .dark {
+    --color-zinc-50: #0e0f12;
+    --color-zinc-100: #15171b;
+    --color-zinc-200: #1f2228;
+    --color-zinc-300: #2a2e36;
+    --color-zinc-400: #4a4f59;
+    --color-zinc-500: #7A7A7A;
+    --color-zinc-600: #BDBDBD;
+    --color-zinc-700: #d8d9db;
+    --color-zinc-800: #ececef;
+    --color-zinc-900: #ffffff;
+
+    --color-sky-50: #1a1230;
+    --color-sky-100: #241845;
+    --color-sky-300: #5D36B4;
+    --color-sky-500: #a98aff;
+    --color-sky-600: #c8adff;
+    --color-sky-700: #e3d6ff;
+    --color-sky-900: #f1ebff;
+
+    --bg-page: #0b0c0f;
+    --bg-surface: #15171b;
+    --bg-surface-2: #1f2228;
+    --border-subtle: #2a2e36;
+  }
+
+  html, body {
+    font-family: var(--font-sans);
+    background: var(--bg-page);
+    color: var(--color-zinc-700);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  code, pre, kbd, samp {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background: var(--color-brand-500);
+    color: #fff;
+  }
+}

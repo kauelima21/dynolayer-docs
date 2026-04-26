@@ -2,9 +2,15 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'docs',
-    loadChildren: () => import('./pages/documentation/documentation.routes')
-      .then(c => c.DOCS_ROUTES)
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./pages/landing/landing.component').then((c) => c.LandingComponent),
   },
-  {path: '', redirectTo: 'docs', pathMatch: 'full'}
+  {
+    path: 'docs',
+    loadChildren: () =>
+      import('./pages/documentation/documentation.routes').then((c) => c.DOCS_ROUTES),
+  },
+  { path: '**', redirectTo: '' },
 ];

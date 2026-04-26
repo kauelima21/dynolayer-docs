@@ -91,4 +91,10 @@
     background: var(--color-brand-500);
     color: #fff;
   }
+
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  margin-right: 0 !important;
 }
